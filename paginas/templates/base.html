@@ -1,0 +1,56 @@
+<!-- Este é o arquivo base, onde todo o site terá este formato -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    {% block titulo %}
+    <title></title>
+    {% endblock %}
+    <link rel="shortcut icon" href="{% static 'img/favicon/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block style %}
+    {% endblock %}
+</head>
+
+<body>
+    <header>
+        <nav class="menuprincipal">
+
+            <a href="{% url 'homepage' %}" target="_self">Página Inicial</a>
+
+            <a href="{% url 'cadastrar_colecao' %}" target="_self">Formulário</a>
+
+            <a href="{% url 'listar_colecao' %}" target="_self">Tabela</a>
+
+            <a href="{% url 'factsheets' %}" target="_self">Fact Sheets</a>
+
+            <a href="{% url 'equipe' %}" target="_self">Equipe</a>
+
+            {% if request.user.is_authenticated %}
+
+            <a id="logout" href="{% url 'logout' %}" target="_self">Sair</a>
+
+            {% else %}
+
+            <a href="{% url 'login' %}" target="_self">Login</a>
+
+            {% endif %}
+
+        </nav>
+    </header>
+
+    <main>
+        {% block conteudo %}
+        
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- <a href="https://ufmg.br" target="_blank" rel="external"><img src="{% static 'img/ufmg.png' %}" alt="Logo da UFMG" class="w-25 img-responsive my-2"></a> -->
+        <p>Em desenvolvimento: <a href="#" target="_blank" rel="external">Mário Henrique</a></p>
+    </footer>
+
+</body>
+</html>

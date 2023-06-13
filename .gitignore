@@ -1,0 +1,10 @@
+.vscode/
+db.sqlite3
+falta_site.txt
+acarologia/
+*/migrations/*
+*/__pycache__/*
+static/factsheets/*
+static/admin/*
+static/img/imagens/*
+staticfiles/

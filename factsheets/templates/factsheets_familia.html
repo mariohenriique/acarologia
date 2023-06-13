@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- esta parte é substituída no arquivo base -->
+{% block titulo %}
+    {% for value in family_data %}
+        <title>Factsheets {{ value.familia }}</title>
+    {% endfor %}
+{% endblock %}
+
+{% block conteudo %}
+
+<article>
+    {% for value in family_data %}
+        <form class="editar" action="{% url 'editar_factsheet' value.pk %}" method="get">
+            <button type="submit">Editar <span></span></button>
+        </form>
+    
+        <section>
+            <h1>{{ value.familia }} {{ value.autor }},{{ value.ano }}</h1>
+        </section>
+
+        <section>
+            <h2>Características Gerais:</h2>
+                <p>{{ value.caracteristicas_gerais | safe | linebreaks }}</p>
+        </section>
+
+        <section>
+            <h2>Diagnoses:</h2>
+                <p>{{ value.diagnoses | safe | linebreaks }}</p>
+        </section>
+
+        <section>
+            <h2>Táxons depositados no UFMG AC e sua origem</h2>
+            <ul>
+                {% for genus_item in genera %}
+                    <li>
+                        <h3><em>{{ genus_item.genus }}</em></h3>
+                        <!-- <ul>
+                            {% for species_item in species %}
+                                {% if species_item.genus == genus_item.genus %}
+                                    <li>
+                                        <h4><em>{{ species_item.scientificName }}</em></h4>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul> -->
+                    </li>
+                {% empty %}
+                    <tr>
+                        <td colspan="1">Sem registro</td>
+                    </tr>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <!-- chamar a funcao mapa e ela me retorna o mapa com os pings -->
+        <section>
+            <h2>Mapa de ocorrência:</h2>
+            {{ map | safe}}
+        </section>
+
+        <!-- Verificar como será melhor para colocar essa parte -->
+        <section>
+            {% if graficozonacao %}
+                <h2>Gráfico de zonacao:</h2>
+            {% endif %}
+        </section>
+
+        <section>
+            <h2>Dados Moleculares:</h2>
+                <p>Abaixo são apresentadas sequências de DNA referentes a espécimes depositados na UFMG AC. Os dados são apresentados no seguinte formato: Gênero, registro na coleção acarológica da UFMG, código do gene sequenciado (ex. 18S), código de acesso do <a class="btn-outline-default" href="https://www.ncbi.nlm.nih.gov/genbank/">Gen Bank</a> e um há um hiperlink incluso. Seguidos da origem daquele indivíduo em específico.</p>
+                {% if value.family == Leeuwenhoekiidae %}
+                    <ul>
+                        <li>28S
+                            <ul>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145667" target="_blank" rel="external">ON145667</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145647" target="_blank" rel="external">ON145647</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145668" target="_blank" rel="external">ON145668</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145669" target="_blank" rel="external">ON145669</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145657" target="_blank" rel="external">ON145657</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145630" target="_blank" rel="external">ON145630</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145656" target="_blank" rel="external">ON145656</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145635" target="_blank" rel="external">ON145635</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145646" target="_blank" rel="external">ON145646</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145629" target="_blank" rel="external">ON145629</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145658" target="_blank" rel="external">ON145658</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145660" target="_blank" rel="external">ON145660</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145659" target="_blank" rel="external">ON145659</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145661" target="_blank" rel="external">ON145661</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145662" target="_blank" rel="external">ON145662</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145663" target="_blank" rel="external">ON145663</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145664" target="_blank" rel="external">ON145664</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145665" target="_blank" rel="external">ON145665</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145666" target="_blank" rel="external">ON145666</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON145631" target="_blank" rel="external">ON145631</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>COI
+                            <ul>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146215" target="_blank" rel="external">ON146215</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146211" target="_blank" rel="external">ON146211</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146220" target="_blank" rel="external">ON146220</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146212" target="_blank" rel="external">ON146212</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146226" target="_blank" rel="external">ON146226</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146213" target="_blank" rel="external">ON146213</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146216" target="_blank" rel="external">ON146216</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146224" target="_blank" rel="external">ON146224</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146217" target="_blank" rel="external">ON146217</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146227" target="_blank" rel="external">ON146227</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146221" target="_blank" rel="external">ON146221</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146222" target="_blank" rel="external">ON146222</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146223" target="_blank" rel="external">ON146223</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146218" target="_blank" rel="external">ON146218</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ncbi.nlm.nih.gov/nuccore/ON146208" target="_blank" rel="external">ON146208</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                {% else %}
+                <p>Sem registro de dados Moleculares</p>
+                {% endif %}
+        </section>
+
+        <section>
+            {% if imagens %}
+                <h2>Imagens:</h2>
+            {% endif %}
+                    <div class="allimages">
+                        {% for image_item in imagens %}
+                        <figure>
+                            <picture>
+                                <img src="{{ image_item.imagens.url }}" alt="{{ image_item.legenda }}">
+                            </picture>
+                            <figcaption>{{ image_item.legenda | safe }}</figcaption>
+                        </figure>
+                        {% empty %}
+                        {% endfor %}
+                    </div>
+        </section>
+
+        <section>
+            <h2>Referências:</h2>
+                <p>{{ value.referencias | safe | linebreaks }}</p>
+        </section>
+
+    {% empty %}
+            <p>A família {{ family }} não possui factsheets.</p>
+            {% if request.user.is_authenticated %}
+                <a href="/cadastrar/factsheets/">
+                    <button type="button">Cadastrar</button>
+                </a>
+            {% endif %}
+    {% endfor %}
+</article>
+
+{% endblock %}
